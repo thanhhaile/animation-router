@@ -1,4 +1,4 @@
-export const ComponentNameWithPath = {
+export const PathName = {
   HomePage: '/',
   AboutPage: '/about',
   ContactPage: '/contact'

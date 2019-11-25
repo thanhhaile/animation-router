@@ -1,112 +1,116 @@
-import React, { useState, useContext, useEffect , useRef } from 'react';
-import { withRouter } from 'react-router-dom'
-import { AnimationContext } from '../../context/AnimationContext';
-import _ from 'lodash';
+import React, { useState, useContext, useEffect } from 'react';
+import classnames from 'classnames';
 
-import HomePage from '../../pages/HomePage/HomePage';
-import AboutPage from '../../pages/AboutPage/AboutPage';
-import ContactPage from '../../pages/ContactPage/ContactPage';
+import { AnimationContext } from '../../context/AnimationContext';
 
 import style from './AnimationComponent.module.css';
 
-let ref = false;
+let out = false;
+let preComponent;
 
 const AnimationComponent = Component => {
   
   const NewComponent = () => {
-    
-    // let ref = useRef(false).current;
-    
-    const context = useContext(AnimationContext);
-    
-    const { time } = context;
+    console.log('render');
+    let { time } = useContext(AnimationContext);
 
-    const [preComponent, setPreComponent] = useState();
+    const [render, setRender] = useState(false);
     
-    console.log('Animation Componentttttttttttt',context);
-    console.log('prechilddddddd',context.preChild);
+    let customStyle = {
+      // var(--timeAnimation): 1,
+      // animation: `slideOut 1` ,
+    };
 
-    console.log('Animation HOmepageeeee',HomePage);
+    // console.log('prechilddddddd',preComponent);
+    // console.log('currentchilddddddd',currentComponent);
 
     useEffect(() => {
-      // console.log('unmount');
-      if( context.pre === '/') {
-        ref = true;
-        setPreComponent(<HomePage />);
-        setTimeout(() => { ref = false; setPreComponent('')}, time - 100);
-      } else if (context.pre === '/about') {
-        ref = true;
-        setPreComponent(<AboutPage />);
-        setTimeout(() => { ref = false; setPreComponent('')}, time - 100);
-      } else if (context.pre === '/contact') {
-        ref = true;
-        setPreComponent(<ContactPage />);
-        setTimeout(() => { ref = false; setPreComponent('')}, time - 100);
+      if (preComponent !== undefined) {
+        out = true;
+
+        setRender(true);
       }
+      setTimeout(() => { 
+        out = false; 
+        preComponent = false; 
+        setRender(false);
+      }, time - 100);
+
     }, [])
 
+    useEffect(() => {
+      console.log('re render');
+      return () => {
+        preComponent = (<Component />);
+      }
+    });
 
     return (
-      <div className = {`${ref ? style.isOut : style.isIn} `}>
+      <div
+      className = {classnames({
+        [style.isOut] : out,
+        [style.isIn]: !out })} 
+        style = {customStyle} >
         {
-          preComponent || (<Component/>)  
+          preComponent
         }
+
+        <Component />
       </div>
     );
   }
   return NewComponent;
+
 };
 
 export default AnimationComponent;
 
 
 
+// let ref = false;
+
 // const AnimationComponent = Component => {
-
-//   const context = useContext(AnimationContext);
-//   console.log('111111111111111',Component);
-//   console.log('111111111111111',props.children);
-
-//   console.log('Animation Componentttttttttttt',context);
-
-//   const [shouldRender, setShouldRender] = useState(false);
   
+//   const NewComponent = () => {
+    
+//     // let ref = useRef(false).current;
+    
+//     const context = useContext(AnimationContext);
+    
+//     const { time } = context;
 
-//   const time = _.debounce((child) => {
-//     console.log('debounce');
-//     return child;
-//   }, 1000);
+//     const [preComponent, setPreComponent] = useState();
+    
+//     console.log('Animation Componentttttttttttt',context);
+//     console.log('prechilddddddd',context.preChild);
 
-//   const handleOut = _.debounce((child) => {
-//     console.log('debounce')
+//     useEffect(() => {
+//       // console.log('unmount');
+//       if( context.pre === '/') {
+//         ref = true;
+//         setPreComponent(<HomePage />);
+//         setTimeout(() => { ref = false; setPreComponent('')}, time - 100);
+//       } else if (context.pre === '/about') {
+//         ref = true;
+//         setPreComponent(<AboutPage />);
+//         setTimeout(() => { ref = false; setPreComponent('')}, time - 100);
+//       } else if (context.pre === '/contact') {
+//         ref = true;
+//         setPreComponent(<ContactPage />);
+//         setTimeout(() => { ref = false; setPreComponent('')}, time - 100);
+//       }
+//     }, [])
+
+
 //     return (
-//       <div className={`${style.isOut}`}>
-//         {child}
+//       <div className = {`${ref ? style.isOut : style.isIn} `}>
+//         {
+//           preComponent || (<Component/>)  
+//         }
 //       </div>
-//     )
-//   }, 1000);
-
-
-//   useEffect(() => {
-//     return () => {
-//       console.log('2222222222222222',props);
-
-//       return (
-//         <div className={`${style.isOut}`}>
-//           {props}
-//         </div>
-//       )
-//     }
-//   }, []);
-
-//   return (
-//     <>
-//       <div>
-//         <Component />
-//       </div>
-//       {/* <div className={`${props.className} ${style.isIn}`}>
-//         {props.children}
-//       </div> */}
-//     </>
-//   );
+//     );
+//   }
+//   return NewComponent;
 // };
+
+// export default AnimationComponent;

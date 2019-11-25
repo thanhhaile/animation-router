@@ -1,4 +1,8 @@
 
+:root {
+  --animation-duration: 1s;
+}
+
 @keyframes slideOut{
   0% {
     transform: translateX(0%); opacity: 1;
@@ -42,12 +46,12 @@
 
 .isOut {
   width: 100%;
-  animation: slideOut 1s;
+  animation: slideOut var(--animation-duration);
 }
 
 .isIn {
   width: 100%;
-  animation: slideIn 1s ;
+  animation: slideIn var(--animation-duration);
 };
 
 
