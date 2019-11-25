@@ -1,0 +1,10 @@
+.contactPageContainer {
+  width: 80%;
+  margin: 0 auto;
+  min-height: 50vh;
+  background-color: rgba(41, 119, 61, 0.651);
+}
+/* 
+.pageActive{
+  transform: scale(1);
+} */

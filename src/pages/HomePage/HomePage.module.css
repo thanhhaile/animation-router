@@ -1,0 +1,19 @@
+.homePageContainer {
+  width: 80%;
+  margin: 0 auto;
+  min-height: 50vh;
+  background-color: rgba(121, 51, 42, 0.733);
+  /* transform: translateX(100%); */
+  /* transform: scale(0.3); */
+  /* transition: all .6s; */
+}
+
+/* .pageActive{
+  transform: translateX(0);
+  
+}
+
+.pageDisactive{
+  transform: translateX(-100%);
+  
+} */

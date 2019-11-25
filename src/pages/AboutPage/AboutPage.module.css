@@ -1,0 +1,13 @@
+.aboutPageContainer {
+  width: 80%;
+  margin: 0 auto;
+  min-height: 50vh;
+  background-color: rgba(44, 44, 145, 0.747);
+  /* transform: scale(0.3);
+  transition: all 1s; */
+
+}
+
+/* .aboutPageContainerActive {
+  transform: scale(1);
+} */

@@ -1,0 +1,22 @@
+.options {
+  width: 20%;
+  margin: 20px auto 5px;
+  font-size: 20px;
+  display: flex;
+  justify-content: space-between;
+
+}
+
+.option {
+  text-decoration: none;
+  color: gray;
+}
+
+.option:hover {
+  color: blue;
+};
+
+.isActive {
+  color: black;
+}
+
